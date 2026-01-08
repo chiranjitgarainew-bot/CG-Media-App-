@@ -1,15 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <script src="script.js"></script>
-  <title></title>
+  <title>Your Study</title>
 </head>
 <body>
 
 <main>
-  
   <section id="md-view" class="view active"
     style="padding:16px; line-height:1.7;">
     Loading...
@@ -18,6 +15,7 @@
 
 <script src="js/md-loader.js"></script>
 <script src="js/router.js"></script>
+
 <script>
 async function login() {
   const email = document.getElementById("email").value;
@@ -32,21 +30,42 @@ async function login() {
   const data = await res.json();
 
   if (!data.success) {
-    document.getElementById("error").innerText = "Login failed";
+    document.getElementById("msg").innerText = data.error || "Login failed";
     return;
   }
 
-  // Save session
+  localStorage.setItem("token", data.token);
   localStorage.setItem("user", JSON.stringify(data.user));
 
-  // Role based redirect
   if (data.user.role === "admin") {
     loadPage("admin");
   } else {
-    loadPage("overview");
+    loadPage("home"); // overview.md
   }
 }
+
+async function signup() {
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const res = await fetch("http://localhost:5000/api/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, password })
+  });
+
+  const data = await res.json();
+
+  if (!data.success) {
+    document.getElementById("msg").innerText = data.error || "Signup failed";
+    return;
+  }
+
+  document.getElementById("msg").innerText =
+    "Signup successful. Please login.";
+}
 </script>
-  
+
 </body>
 </html>
