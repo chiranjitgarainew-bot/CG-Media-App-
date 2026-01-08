@@ -1,19 +1,19 @@
-# Authentication & Account System
+# 🔐 Login / Signup
 
-## Signup
-- Email + Password
-- System auto-generates Student ID
-- Student ID is permanent and read-only
+<div id="auth-box">
 
-Example Student ID:
-YS-2026-000123
+<input id="name" placeholder="Name (Signup only)" />
+<br><br>
 
-## Login
-- Email + Password
-- Restores all previous data automatically
+<input id="email" placeholder="Email" />
+<br><br>
 
-## Security
-- Password hashing (bcrypt/argon2)
-- JWT / session-based auth
-- Rate limiting & brute-force protection
-- CSRF & XSS protection
+<input id="password" type="password" placeholder="Password" />
+<br><br>
+
+<button onclick="login()">Login</button>
+<button onclick="signup()">Signup</button>
+
+<p id="msg"></p>
+
+</div>
