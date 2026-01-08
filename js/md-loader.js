@@ -1,8 +1,15 @@
 async function loadMarkdown(file) {
   const res = await fetch(`content/${file}`);
-  const md = await res.text();
+  const content = await res.text();
 
-  const html = md
+  // 🔐 AUTH PAGE → RAW HTML (NO MARKDOWN PARSING)
+  if (file === "auth.md") {
+    document.getElementById("md-view").innerHTML = content;
+    return;
+  }
+
+  // 📘 NORMAL MARKDOWN PAGES
+  const html = content
     .replace(/^### (.*$)/gim, "<h3>$1</h3>")
     .replace(/^## (.*$)/gim, "<h2>$1</h2>")
     .replace(/^# (.*$)/gim, "<h1>$1</h1>")
