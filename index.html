@@ -18,7 +18,35 @@
 
 <script src="js/md-loader.js"></script>
 <script src="js/router.js"></script>
+<script>
+async function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
+  const res = await fetch("http://localhost:5000/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  });
+
+  const data = await res.json();
+
+  if (!data.success) {
+    document.getElementById("error").innerText = "Login failed";
+    return;
+  }
+
+  // Save session
+  localStorage.setItem("user", JSON.stringify(data.user));
+
+  // Role based redirect
+  if (data.user.role === "admin") {
+    loadPage("admin");
+  } else {
+    loadPage("overview");
+  }
+}
+</script>
   
 </body>
 </html>
