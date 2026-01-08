@@ -25,7 +25,24 @@ const routes = {
 
 function handleRoute() {
   const hash = location.hash.replace("#", "") || "home";
-  if (routes[hash]) loadMarkdown(routes[hash]);
+  const user = getUser();
+
+  // 🔒 Not logged in → only auth page allowed
+  if (!user && hash !== "auth") {
+    location.hash = "#auth";
+    return;
+  }
+
+  // 👑 Admin guard
+  if (hash === "admin" && user?.role !== "admin") {
+    location.hash = "#home";
+    return;
+  }
+
+  // ✅ Valid route
+  if (routes[hash]) {
+    loadMarkdown(routes[hash]);
+  }
 }
 
 window.addEventListener("hashchange", handleRoute);
