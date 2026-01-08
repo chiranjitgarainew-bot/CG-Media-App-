@@ -1,3 +1,14 @@
+function getUser() {
+  try {
+    return JSON.parse(localStorage.getItem("user"));
+  } catch {
+    return null;
+  }
+}
+
+function isLoggedIn() {
+  return getUser() !== null;
+}
 const routes = {
   home: "overview.md",
   auth: "auth.md",
