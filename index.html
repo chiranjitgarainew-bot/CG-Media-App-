@@ -5,53 +5,68 @@
   <title>Your Study</title>
 </head>
 <style>
-/* ===== LOGIN / SIGNUP DESIGN ===== */
+  <style>
+    :root {
+      --bg: #070b1a;
+      --glass: rgba(255, 255, 255, .08);
+      --text: #e8f0ff;
+      --muted: #9fb0d1;
+      --blue-accent: #38bdf8;
+      --auth-bg: linear-gradient(135deg, #a770ef 0%, #cf8bf3 50%, #fbc2eb 100%);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Noto Sans Bengali', sans-serif; }
+    
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
 
-.auth-page {
-  max-width: 420px;
-  margin: 40px auto;
-  padding: 24px;
-  font-family: system-ui, sans-serif;
-}
+    /* Auth Wrapper */
+    #auth-wrapper {
+      width: 100%; max-width: 420px; padding: 20px;
+    }
 
-.auth-title {
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
+    #messageBoxSection {
+      background: #fff; border-radius: 20px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+      padding: 30px; color: #333;
+    }
 
-.auth-box {
-  margin-bottom: 40px;
-}
+    .auth-page { display: none; flex-direction: column; gap: 15px; animation: fadeIn 0.5s ease forwards; }
+    .auth-page.active { display: flex; }
+    .auth-page h2 { text-align: center; margin-bottom: 10px; font-weight: 700; color: #333; font-size: 1.5rem; }
+    
+    .auth-input, .auth-textarea {
+      padding: 14px; border: 1px solid #e0e0e0; border-radius: 12px;
+      font-size: 15px; background-color: #f9f9f9; width: 100%;
+      margin-bottom: 8px; color: #333;
+    }
+    
+    .auth-btn {
+      padding: 14px; background: linear-gradient(to right, #667eea, #a770ef);
+      color: white; font-size: 16px; border: none; border-radius: 12px;
+      cursor: pointer; font-weight: 600; width: 100%; transition: transform 0.2s;
+    }
+    .auth-btn:active { transform: scale(0.98); }
 
-.auth-box input {
-  display: block;
-  width: 100%;
-  padding: 10px 12px;
-  margin: 10px 0;
-  font-size: 15px;
-  border: 1px solid #999;
-  border-radius: 4px;
-}
+    .social-login {
+      background: #fff; color: #444; border: 1px solid #ddd;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    
+    .auth-link { text-align: center; font-size: 14px; color: #666; margin-top: 10px; }
+    .auth-link span { color: #a770ef; font-weight: bold; cursor: pointer; }
+    
+    .divider { text-align: center; color: #aaa; font-size: 12px; margin: 5px 0; position: relative; }
+    .divider::before, .divider::after { content: ""; position: absolute; top: 50%; width: 40%; height: 1px; background: #eee; }
+    .divider::before { left: 0; }
+    .divider::after { right: 0; }
 
-.auth-box button {
-  padding: 8px 16px;
-  font-size: 15px;
-  border: 1px solid #666;
-  background: #f2f2f2;
-  cursor: pointer;
-}
+    /* App Success Screen (Profile) */
+    #main-app-wrapper { display: none; width: 100%; max-width: 500px; padding: 20px; text-align: center; }
+    .profile-card { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass); border-radius: 16px; padding: 20px; }
+    .profile-info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--glass); }
+    .btn-danger { background: #ef4444; color: white; padding: 10px; border-radius: 8px; width: 100%; margin-top: 20px; cursor: pointer; border: none; }
 
-.auth-link {
-  margin-top: 12px;
-  font-size: 15px;
-}
-
-.auth-divider {
-  border-top: 1px solid #ccc;
-  margin: 40px 0;
-}
-</style>
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .hidden { display: none !important; }
 <body>
 
 <main>
