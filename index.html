@@ -68,4 +68,48 @@ async function signup() {
 </script>
 
 </body>
+<script>
+async function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const res = await fetch("http://localhost:5000/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  });
+
+  const data = await res.json();
+
+  if (!data.success) {
+    document.getElementById("msg").innerText = "Login failed";
+    return;
+  }
+
+  localStorage.setItem("user", JSON.stringify(data.user));
+
+  if (data.user.role === "admin") {
+    location.hash = "admin";
+  } else {
+    location.hash = "overview";
+  }
+}
+
+async function signup() {
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("signupEmail").value;
+  const password = document.getElementById("signupPassword").value;
+
+  const res = await fetch("http://localhost:5000/api/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, password })
+  });
+
+  const data = await res.json();
+
+  document.getElementById("msg").innerText =
+    data.success ? "Account created. Login now." : data.error;
+}
+</script>
 </html>
