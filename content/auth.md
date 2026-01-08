@@ -1,30 +1,43 @@
-<div class="auth-page">
+<div id="auth-wrapper">
 
-<div class="auth-box">
-  <div class="auth-title">🔐 Login</div>
+  <div id="messageBoxSection">
 
-  <input id="email" placeholder="Email" />
-  <input id="password" type="password" placeholder="Password" />
+    <!-- LOGIN -->
+    <div class="auth-page active" id="loginPage">
 
-  <button onclick="login()">Login</button>
+      <h2>🔐 Login</h2>
 
-  <div class="auth-link">
-    New user? Create account
+      <input id="loginEmail" class="auth-input" placeholder="Email" />
+      <input id="loginPassword" type="password" class="auth-input" placeholder="Password" />
+
+      <button class="auth-btn" onclick="login()">Login</button>
+
+      <div class="auth-link">
+        New user?
+        <span onclick="showSignup()">Create account</span>
+      </div>
+
+    </div>
+
+    <!-- SIGNUP -->
+    <div class="auth-page" id="signupPage">
+
+      <h2>📝 Signup</h2>
+
+      <input id="signupName" class="auth-input" placeholder="Full Name" />
+      <input id="signupEmail" class="auth-input" placeholder="Email" />
+      <input id="signupPassword" type="password" class="auth-input" placeholder="Password" />
+
+      <button class="auth-btn" onclick="signup()">Signup</button>
+
+      <div class="auth-link">
+        Already have account?
+        <span onclick="showLogin()">Login</span>
+      </div>
+
+    </div>
+
+    <p id="msg"></p>
+
   </div>
-</div>
-
-<div class="auth-divider"></div>
-
-<div class="auth-box">
-  <div class="auth-title">📝 Signup</div>
-
-  <input id="name" placeholder="Full Name" />
-  <input id="signupEmail" placeholder="Email" />
-  <input id="signupPassword" type="password" placeholder="Password" />
-
-  <button onclick="signup()">Signup</button>
-</div>
-
-<p id="msg"></p>
-
 </div>
