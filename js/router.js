@@ -47,3 +47,6 @@ function handleRoute() {
 
 window.addEventListener("hashchange", handleRoute);
 window.addEventListener("load", handleRoute);
+function loadPage(page) {
+  location.hash = page;
+}
